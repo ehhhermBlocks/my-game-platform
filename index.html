@@ -3,18 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Game Platform</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111318;
+            color: white;
+        }
+
+        header {
+            background: #1b1e27;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .hero {
+            padding: 50px 20px;
+            text-align: center;
+            background: #191c24;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #b9bdc9;
+        }
+
+        .games {
+            padding: 25px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: #1b1e27;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .game-thumbnail {
+            height: 120px;
+            background: #292e3b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .game-card h3 {
+            margin-bottom: 5px;
+        }
+
+        .game-card p {
+            color: #9da2b0;
+        }
+
+        .play-button {
+            display: block;
+            background: #5865f2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .play-button:hover {
+            background: #4752c4;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>🎮 My Game Platform</h1>
+<header>
 
-    <p>Welcome to my game platform!</p>
+    <div class="logo">🎮 My Platform</div>
 
-    <h2>Featured Games</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Discover</a>
+        <a href="#">Create</a>
+    </nav>
 
-    <p>Games will appear here soon...</p>
+</header>
+
+<section class="hero">
+
+    <h1>Welcome! 👋</h1>
+
+    <p>Discover games. Create games. Play together.</p>
+
+</section>
+
+<section class="games">
+
+    <h2>⭐ Featured Games</h2>
+
+    <div class="game-grid">
+
+        <div class="game-card">
+
+            <div class="game-thumbnail">
+                🎮
+            </div>
+
+            <h3>My First Game</h3>
+
+            <p>Coming soon...</p>
+
+            <a class="play-button" href="#">
+                PLAY
+            </a>
+
+        </div>
+
+
+        <div class="game-card">
+
+            <div class="game-thumbnail">
+                🏃
+            </div>
+
+            <h3>Awesome Obby</h3>
+
+            <p>Coming soon...</p>
+
+            <a class="play-button" href="#">
+                PLAY
+            </a>
+
+        </div>
+
+
+        <div class="game-card">
+
+            <div class="game-thumbnail">
+                👻
+            </div>
+
+            <h3>Spooky Game</h3>
+
+            <p>Coming soon...</p>
+
+            <a class="play-button" href="#">
+                PLAY
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 </body>
 </html>
