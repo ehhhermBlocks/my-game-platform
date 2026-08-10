@@ -58,12 +58,12 @@
             gap: 20px;
         }
 
-        .game-card {
-            background: #1b1e27;
-            border-radius: 12px;
-            padding: 15px;
-        }
-
+.game-card {
+    background: #1b1e27;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+}
         .game-thumbnail {
             height: 120px;
             background: #292e3b;
@@ -126,7 +126,7 @@
 
     <h2>⭐ Featured Games</h2>
 
-    <div class="game-grid">
+<div class="game-card" onclick="openGame()">
 
 <a href="/my-game-platform/game.html">
     <div class="game-card">
@@ -186,6 +186,11 @@
     </div>
 
 </section>
-
+<script>
+    function openGame() {
+        window.location.href = "/my-game-platform/game.html";
+    }
+</script>
+    
 </body>
 </html>
