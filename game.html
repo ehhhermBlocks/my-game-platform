@@ -139,8 +139,8 @@
             const playerX = x;
             const playerY = y;
 
-            const coinX = parseInt(coin.style.left);
-            const coinY = parseInt(coin.style.top);
+            const coinX = coin.offsetLeft;
+const coinY = coin.offsetTop;
 
             const distance = Math.sqrt(
                 (playerX - coinX) ** 2 +
