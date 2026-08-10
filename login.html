@@ -1,1 +1,175 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Sign Up - Arcadia</title> <style> body { margin: 0; font-family: Arial, sans-serif; background: #111318; color: white; } .container { max-width: 420px; margin: 60px auto; padding: 25px; } .box { background: #1b1e27; padding: 30px; border-radius: 16px; } h1 { text-align: center; } input { width: 100%; box-sizing: border-box; padding: 13px; margin-top: 10px; border: none; border-radius: 8px; background: #252936; color: white; } button { width: 100%; padding: 13px; margin-top: 20px; border: none; border-radius: 8px; background: #5865f2; color: white; font-size: 16px; cursor: pointer; } #message { text-align: center; margin-top: 15px; } .back, .login { display: block; margin-top: 20px; text-align: center; color: #b9bdc9; } .login { color: #7289ff; } </style> </head> <body> <div class="container"> <div class="box"> <h1>🎮 Join Arcadia</h1> <p style="text-align:center;"> Create your free Arcadia account. </p> <form id="signupForm"> <input type="email" id="email" placeholder="Email" required > <input type="password" id="password" placeholder="Password" minlength="6" required > <button type="submit"> Create Account </button> </form> <div id="message"></div> <a class="login" href="/my-game-platform/login.html"> Already have an account? Log In </a> <a class="back" href="/my-game-platform/"> ← Back to Arcadia </a> </div> </div> <script type="module"> import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"; const SUPABASE_URL = "https://fxvbhmekwikhxrqcmnpk.supabase.co"; const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY_HERE"; const supabase = createClient( SUPABASE_URL, SUPABASE_KEY ); const form = document.getElementById("signupForm"); const message = document.getElementById("message"); form.addEventListener("submit", async (event) => { event.preventDefault(); const email = document.getElementById("email").value; const password = document.getElementById("password").value; message.textContent = "Creating your account..."; const { error } = await supabase.auth.signUp({ email: email, password: password }); if (error) { message.textContent = error.message; return; } message.textContent = "Account created! 📧 Check your email to verify your account."; form.reset(); }); </script> </body> </html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - Arcadia</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111318;
+            color: white;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 25px;
+        }
+
+        .box {
+            background: #1b1e27;
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #252936;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background: #5865f2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back,
+        .login {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #b9bdc9;
+        }
+
+        .login {
+            color: #7289ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="box">
+
+        <h1>🎮 Join Arcadia</h1>
+
+        <p style="text-align:center;">
+            Create your free Arcadia account.
+        </p>
+
+        <form id="signupForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                minlength="6"
+                required
+            >
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+        <a class="login" href="/my-game-platform/login.html">
+            Already have an account? Log In
+        </a>
+
+        <a class="back" href="/my-game-platform/">
+            ← Back to Arcadia
+        </a>
+
+    </div>
+</div>
+
+<script type="module">
+
+    import { createClient } from
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const SUPABASE_URL =
+        "https://fxvbhmekwikhxrqcmnpk.supabase.co";
+
+    const SUPABASE_KEY =
+        "YOUR_PUBLISHABLE_KEY_HERE";
+
+    const supabase = createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const form = document.getElementById("signupForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        message.textContent = "Creating your account...";
+
+        const { error } = await supabase.auth.signUp({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            message.textContent = error.message;
+            return;
+        }
+
+        message.textContent =
+            "Account created! 📧 Check your email to verify your account.";
+
+        form.reset();
+    });
+
+</script>
+
+</body>
+</html>
+```
+
