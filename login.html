@@ -1,0 +1,204 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Arcadia</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111318;
+            color: white;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 25px;
+        }
+
+        .box {
+            background: #1b1e27;
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #252936;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background: #5865f2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #b9bdc9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="box">
+
+        <h1>🎮 Welcome Back</h1>
+
+        <p style="text-align:center;">
+            Log in to your Arcadia account.
+        </p>
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit">
+                Log In
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+        <a class="back" href="/my-game-platform/">
+            ← Back to Arcadia
+        </a>
+
+    </div>
+</div>
+
+<script type="module">
+
+    import { createClient } from
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const SUPABASE_URL =
+        "https://fxvbhmekwikhxrqcmnpk.supabase.co";
+
+    const SUPABASE_KEY =
+        "YOUR_PUBLISHABLE_KEY_HERE";
+
+    const supabase = createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        message.textContent = "Logging in...";
+
+        const { data, error } =
+            await supabase.auth.signInWithPassword({
+                email,
+                password
+            });
+
+        if (error) {
+            message.textContent = error.message;
+            return;
+        }
+
+        const user = data.user;
+
+        // Check whether this user already has a profile
+        const { data: profile } =
+            await supabase
+                .from("profiles")
+                .select("id")
+                .eq("id", user.id)
+                .maybeSingle();
+
+        // If they don't have one, create it
+        if (!profile) {
+
+            const { error: profileError } =
+                await supabase
+                    .from("profiles")
+                    .insert({
+                        id: user.id,
+                        username:
+                            "user_" +
+                            user.id.substring(0, 8),
+                        display_name:
+                            "New Arcadia User",
+                        bio: "",
+                        avatar_url: "",
+                        arcs: 250
+                    });
+
+            if (profileError) {
+                console.error(profileError);
+                message.textContent =
+                    "Logged in, but your profile could not be created.";
+                return;
+            }
+        }
+
+        message.textContent = "Logged in! 🎮";
+
+        setTimeout(() => {
+            window.location.href =
+                "/my-game-platform/";
+        }, 1000);
+
+    });
+
+</script>
+
+</body>
+</html>
+```
