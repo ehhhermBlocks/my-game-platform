@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coin Collector</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #111318;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        #game {
+            width: 90vw;
+            max-width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            background: #202532;
+            border: 3px solid #5865f2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #player {
+            width: 30px;
+            height: 30px;
+            background: #5865f2;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+
+        #coin {
+            width: 25px;
+            height: 25px;
+            background: gold;
+            border-radius: 50%;
+            position: absolute;
+            left: 300px;
+            top: 200px;
+        }
+
+        #score {
+            font-size: 20px;
+        }
+
+        .controls {
+            margin-top: 15px;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 10px 18px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🪙 Coin Collector</h1>
+
+    <div id="score">
+        Coins: 0
+    </div>
+
+    <div id="game">
+
+        <div id="player"></div>
+
+        <div id="coin"></div>
+
+    </div>
+
+    <div class="controls">
+
+        <div>
+            <button onclick="move('up')">⬆️</button>
+        </div>
+
+        <div>
+            <button onclick="move('left')">⬅️</button>
+            <button onclick="move('down')">⬇️</button>
+            <button onclick="move('right')">➡️</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        const player = document.getElementById("player");
+        const coin = document.getElementById("coin");
+        const scoreText = document.getElementById("score");
+
+        let x = 50;
+        let y = 50;
+        let score = 0;
+
+        function move(direction) {
+
+            const speed = 20;
+
+            if (direction === "up") {
+                y -= speed;
+            }
+
+            if (direction === "down") {
+                y += speed;
+            }
+
+            if (direction === "left") {
+                x -= speed;
+            }
+
+            if (direction === "right") {
+                x += speed;
+            }
+
+            x = Math.max(0, Math.min(x, 570));
+            y = Math.max(0, Math.min(y, 370));
+
+            player.style.left = x + "px";
+            player.style.top = y + "px";
+
+            checkCoin();
+        }
+
+        function checkCoin() {
+
+            const playerX = x;
+            const playerY = y;
+
+            const coinX = parseInt(coin.style.left);
+            const coinY = parseInt(coin.style.top);
+
+            const distance = Math.sqrt(
+                (playerX - coinX) ** 2 +
+                (playerY - coinY) ** 2
+            );
+
+            if (distance < 35) {
+
+                score++;
+
+                scoreText.textContent = "Coins: " + score;
+
+                coin.style.left =
+                    Math.floor(Math.random() * 550) + "px";
+
+                coin.style.top =
+                    Math.floor(Math.random() * 350) + "px";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
